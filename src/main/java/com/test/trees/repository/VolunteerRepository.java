@@ -1,12 +1,10 @@
-package repository;
+package com.test.trees.repository;
 
-
-import model.Volunteer;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
+@Primary
 public interface VolunteerRepository extends JpaRepository<Volunteer, Long> {
 }
+

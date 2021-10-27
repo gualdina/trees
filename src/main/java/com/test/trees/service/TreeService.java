@@ -1,9 +1,8 @@
-package service;
+package com.test.trees.service;
 
-import model.Tree;
-import model.Volunteer;
+import com.test.trees.model.Tree;
 import org.springframework.stereotype.Service;
-import repository.TreeRepository;
+import com.test.trees.repository.TreeRepository;
 
 import java.util.List;
 

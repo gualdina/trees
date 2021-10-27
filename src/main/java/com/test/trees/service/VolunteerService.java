@@ -1,10 +1,8 @@
-package service;
+package com.test.trees.service;
 
-import model.Volunteer;
+
+import com.test.trees.repository.VolunteerRepository;
 import org.springframework.stereotype.Service;
-import repository.VolunteerRepository;
-
-import java.util.List;
 
 @Service
 public class VolunteerService {

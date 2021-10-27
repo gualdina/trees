@@ -1,4 +1,4 @@
-package model;
+package com.test.trees.model;
 
 import lombok.*;
 

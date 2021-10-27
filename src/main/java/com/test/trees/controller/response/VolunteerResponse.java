@@ -1,4 +1,4 @@
-package controller.response;
+package com.test.trees.controller.response;
 
 import lombok.*;
 

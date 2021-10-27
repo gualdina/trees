@@ -1,10 +1,9 @@
-package repository;
+package com.test.trees.repository;
 
-import model.Tree;
+import com.test.trees.model.Volunteer;
+import com.sun.source.tree.Tree;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.Optional;
 
 @Repository
 public interface TreeRepository extends JpaRepository<Tree, Long> {

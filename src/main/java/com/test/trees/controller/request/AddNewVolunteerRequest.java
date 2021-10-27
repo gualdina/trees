@@ -1,4 +1,4 @@
-package controller.request;
+package com.test.trees.controller.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

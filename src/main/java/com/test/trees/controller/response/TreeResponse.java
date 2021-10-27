@@ -1,7 +1,7 @@
-package controller.response;
+package com.test.trees.controller.response;
 
 import lombok.*;
-import model.TreeType;
+import com.test.trees.model.TreeType;
 
 
 @Getter

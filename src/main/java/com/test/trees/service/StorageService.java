@@ -1,11 +1,9 @@
-package service;
+package com.test.trees.service;
 
-import model.Storage;
-import model.Tree;
+
+import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoProperties;
 import org.springframework.stereotype.Service;
-import repository.StorageRepository;
 
-import java.util.List;
 
 @Service
 public class StorageService {
@@ -15,7 +13,7 @@ public class StorageService {
         this.storageRepository = storageRepository;
     }
     //get Storage by id
-    public Storage getStorageById(Long id) {
+    public EmbeddedMongoProperties.Storage getStorageById(Long id) {
         storageRepository.findById(id);
     }
     //get all Storages
