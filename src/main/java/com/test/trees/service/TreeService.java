@@ -1,5 +1,6 @@
 package com.test.trees.service;
 
+import com.test.trees.controller.request.AddNewTreeRequest;
 import com.test.trees.model.Tree;
 import org.springframework.stereotype.Service;
 import com.test.trees.repository.TreeRepository;

@@ -1,8 +1,13 @@
 package com.test.trees.service;
 
 
+import com.test.trees.controller.request.AddNewStorageRequest;
+import com.test.trees.model.Storage;
+import com.test.trees.repository.StorageRepository;
 import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoProperties;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -38,4 +43,5 @@ public class StorageService {
         storageToUpdate.setLocation(addNewStorageRequest.getLocation());
         return storageToUpdate;
     }
+
 }

@@ -1,8 +1,12 @@
 package com.test.trees.service;
 
 
+import com.test.trees.controller.request.AddNewVolunteerRequest;
+import com.test.trees.model.Volunteer;
 import com.test.trees.repository.VolunteerRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class VolunteerService {
@@ -13,7 +17,7 @@ public class VolunteerService {
     }
     //get Volunteer by id
     public Volunteer getVolunteerById(Long id) {
-        return volunteerRepository.findById(id).orElseThrow(VolunteerNotFound::new);
+       volunteerRepository.findById(id);
     }
     //get all Volunteers
     public List<Volunteer> getAllVolunteers() {
