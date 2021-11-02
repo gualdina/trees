@@ -1,10 +1,14 @@
 package com.test.trees.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.test.trees.controller.response.StorageResponse;
+import com.test.trees.controller.response.TreeResponse;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Getter
 @Setter
@@ -13,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "storage")
+@Table
 public class Storage {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,19 +25,33 @@ public class Storage {
     private String name;
     private float area;
     private String location;
-    @OneToMany(mappedBy = "storage")
-    private List<Volunteer> volunteers;
 
-    @ManyToMany //connection to insert and remove pizzas in the order
-    @JoinTable( name ="storage_tree_mapping",
-            joinColumns = { @JoinColumn(name = "storage_id" ) },
-            inverseJoinColumns = { @JoinColumn(name = "tree_id") }
-    )
-    private List<Tree> stockTrees = new ArrayList<>();
-    public void addATree(Tree pizza) {
-        stockTrees.add(tree);
-    }
-    public void removeATree(Tree pizza) {
-        stockTrees.remove(tree);
+    @ManyToOne
+    @JoinColumn(name = "volunteer_id")
+    private List<Volunteer> volunteers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "storage")
+    private List<Tree> trees = new ArrayList<>();
+
+    @JsonIgnore
+    public StorageResponse storageResponse(){
+        List<TreeResponse> treeResponses = new ArrayList<>();
+        if (this.trees!=null && !this.trees.isEmpty()) {
+            for(Tree tree : this.trees) {
+                treeResponses.add(new TreeResponse(
+                        tree.getId(),
+                        tree.getType(),
+                        tree.getRoots(),
+                        tree.getSize(),
+                        tree.getStorage().getName()
+                ));
+            }
+        }
+        return new StorageResponse(
+                this.getId(),
+                this.getName(),
+                this.getArea(),
+                this.getLocation(),
+                treeResponses);
     }
 }

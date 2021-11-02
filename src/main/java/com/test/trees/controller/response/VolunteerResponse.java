@@ -2,6 +2,8 @@ package com.test.trees.controller.response;
 
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -13,4 +15,6 @@ public class VolunteerResponse {
     private String lastName;
     private int age;
     private String city;
+
+    private List<TreeResponse> treeResponses;
 }

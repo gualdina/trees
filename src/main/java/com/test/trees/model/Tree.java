@@ -1,5 +1,7 @@
 package com.test.trees.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.test.trees.controller.response.TreeResponse;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,6 +24,23 @@ public class Tree {
     private TreeType type;
     private String roots;
     private double size;
-    @ManyToMany(mappedBy = "stockTrees")
-    private List<Tree> stockTrees = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "storage_id")
+    private Storage storage;
+
+    @ManyToMany(mappedBy = "volunteerWithTrees")
+    List<Tree> volunteerWithTrees = new ArrayList<>();
+
+    @JsonIgnore
+    public TreeResponse treeResponse(){
+        return new TreeResponse(
+              this.getId(),
+              this.getType(),
+              this.getRoots(),
+              this.getSize(),
+              this.storage.getName()
+        );
+    }
+
+
 }

@@ -1,8 +1,13 @@
 package com.test.trees.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.test.trees.controller.response.TreeResponse;
+import com.test.trees.controller.response.VolunteerResponse;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -11,9 +16,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "volunteer")
 public class Volunteer {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -22,7 +25,37 @@ public class Volunteer {
     private int age;
     private String city;
     @ManyToOne
-    @MapsId("volunteer_id")
     @JoinColumn(name="volunteer_id")
-    private Storage storage;
+    private Storage volunteerInStorage = new Storage();
+    @ManyToMany
+    @JoinTable(
+            name = "volunteer_tree",
+            joinColumns = @JoinColumn(name= "volunteer_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "tree_id", referencedColumnName = "id"))
+    List<Tree> volunteerWithTrees = new ArrayList<>();
+
+    @JsonIgnore
+    public VolunteerResponse volunteerResponse(){
+        List<TreeResponse> treeResponses = new ArrayList<>();
+        if (this.volunteerWithTrees!=null && !this.volunteerWithTrees.isEmpty()) {
+            for (Tree tree : this.volunteerWithTrees) {
+                treeResponses.add(new TreeResponse(
+                        tree.getId(),
+                        tree.getType(),
+                        tree.getRoots(),
+                        tree.getSize(),
+                        tree.getStorage().getName()
+                ));
+            }
+        }
+        return new VolunteerResponse(
+                this.getId(),
+                this.getFirstName(),
+                this.getLastName(),
+                this.getAge(),
+                this.getCity(),
+                treeResponses);
+    }
+
+
 }

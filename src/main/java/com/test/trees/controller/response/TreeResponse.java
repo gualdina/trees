@@ -3,6 +3,8 @@ package com.test.trees.controller.response;
 import lombok.*;
 import com.test.trees.model.TreeType;
 
+import java.lang.reflect.Member;
+
 
 @Getter
 @Setter
@@ -14,4 +16,5 @@ public class TreeResponse {
     private TreeType type;
     private String roots;
     private double size;
+    private String storageName;
 }
